@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <title>Curso Javascript</title>
+    </head>
+    <body>
+            <input type="text" name="user" placeholder="Digite o nome do usuário">
+            <button onclick="listRepositories()">Buscar</button>
+            <ul></ul>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+        <script>
+            var textElement = document.querySelector('input');
+            var listElement = document.querySelector('ul');
+
+            function renderRepositories(repositories){
+                listElement.innerHTML = "";
+
+                for(repo of repositories){
+                    const CreatTextElement = document.createTextNode(repo.name);
+                    const liElement = document.createElement('li');
+
+                    liElement.appendChild(CreatTextElement);
+                    listElement.appendChild(liElement);
+                }
+            }
+
+            function renderLoading(loading) {
+                listElement.innerHTML = "";
+                var textElement = document.createTextNode('Carregando...');
+                var loadingElement = document.createElement('li');
+                loadingElement.appendChild(textElement);
+                listElement.appendChild(loadingElement);
+            }
+           
+            function renderError(loading) {
+                listElement.innerHTML = "";
+                var textElement = document.createTextNode('Erro!');
+                var errorElement = document.createElement('li');
+                errorElement.style.color = "#F00";
+                errorElement.appendChild(textElement);
+                listElement.appendChild(errorElement);
+            }
+
+            function listRepositories(){
+
+                var user = textElement.value;
+
+                if(!user) return;
+
+                renderLoading();
+                
+                axios.get('https://api.github.com/users/'+ user +'/repos')
+                .then(function(response){
+                    renderRepositories(response.data);
+                })
+                .catch(function(){
+                    renderError();
+                });
+            }
+        </script>
+    </body>
+</html>

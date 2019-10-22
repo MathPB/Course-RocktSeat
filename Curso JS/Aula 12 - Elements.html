@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Curso Javascript</title>
+    </head>
+    <body>
+        <div id="app">  
+        </div>
+        <script>
+            var linkElement = document.createElement('a');
+            linkElement.setAttribute('href', 'https://rocketseat.com.br/');
+            linkElement.setAttribute("Title", "Site da RocketSeat");
+
+            var textElement = document.createTextNode("Acesse o site");
+            linkElement
+               .appendChild(textElement);
+
+            var containerElement = document.querySelector("#app");
+            containerElement.appendChild(linkElement);
+        </script>
+    </body>
+</html>

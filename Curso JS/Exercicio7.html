@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Curso Javascript</title>
+    </head>
+    <body>
+        <button id="botao">Clique Aqui!</button>
+
+        <div id="squares"></div>
+
+        <script>
+            var btnElement = document.getElementById('botao');
+            var squareElement = document.getElementById('squares');
+            
+            btnElement.onmouseover = function () {
+
+                var square = document.createElement('div');
+
+                square.style.width = '100px';
+                square.style.height = '100px';
+                square.style.backgroundColor = getRandomColor();
+
+                squareElement.appendChild(square);
+            };
+
+            function getRandomColor() {
+                var letters = "0123456789ABCDEF";
+                var color = "#";
+                for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
+            }
+        </script>
+    </body>
+</html>
